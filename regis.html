@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Web Registration Form</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <form id="registrationForm" onsubmit="return validateForm()">
+    <h2>Web Registration Form</h2>
+
+    <label>First Name:</label>
+    <input type="text" name="firstName" required>
+
+    <label>Last Name:</label>
+    <input type="text" name="lastName" required>
+
+    <label>Father's Name:</label>
+    <input type="text" name="fatherName" required>
+
+    <label>Mother's Name:</label>
+    <input type="text" name="motherName" required>
+
+    <label>Date of Birth:</label>
+    <input type="date" name="dob" required>
+
+    <label>Gender:</label>
+    <select name="gender" required>
+      <option value="">Select Gender</option>
+      <option>Male</option>
+      <option>Female</option>
+      <option>Other</option>
+    </select>
+
+    <label>Address:</label>
+    <textarea name="address" rows="3" required></textarea>
+
+    <label>Qualification:</label>
+    <input type="text" name="qualification" required>
+
+    <label>Education Details:</label>
+    <textarea name="education" rows="3" required></textarea>
+
+    <label>Upload Photo:</label>
+    <input type="file" name="photo" accept="image/*" required>
+
+    <label>Upload Signature:</label>
+    <input type="file" name="signature" accept="image/*" required>
+
+    <label>Email ID:</label>
+    <input type="email" name="email" required>
+
+    <label>Phone Number:</label>
+    <input type="tel" name="phone" pattern="[0-9]{10}" required>
+
+    <div class="btn-group">
+      <button type="submit" class="submit-btn">Submit</button>
+      <button type="reset" class="reset-btn">Reset</button>
+    </div>
+  </form>
+
+  <script src="script.js"></script>
+</body>
+</html>
