@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Web Registration Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      padding: 20px;
+    }
+    form {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 600px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      box-sizing: border-box;
+    }
+    .error {
+      color: red;
+      font-size: 14px;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px;
+      width: 48%;
+      border: none;
+      color: white;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    .submit-btn {
+      background-color: #4CAF50;
+    }
+    .reset-btn {
+      background-color: #f44336;
+    }
+    .btn-group {
+      display: flex;
+      justify-content: space-between;
+    }
+    #result {
+      margin-top: 20px;
+      background: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <form id="registrationForm" onsubmit="return validateForm()">
+    <h2>Web Registration Form</h2>
+
+    <label>First Name:</label>
+    <input type="text" name="firstName">
+    <span class="error" id="firstNameError"></span>
+
+    <label>Last Name:</label>
+    <input type="text" name="lastName">
+    <span class="error" id="lastNameError"></span>
+
+    <label>Father's Name:</label>
+    <input type="text" name="fatherName">
+    <span class="error" id="fatherNameError"></span>
+
+    <label>Mother's Name:</label>
+    <input type="text" name="motherName">
+    <span class="error" id="motherNameError"></span>
+
+    <label>Date of Birth:</label>
+    <input type="date" name="dob">
+    <span class="error" id="dobError"></span>
+
+    <label>Gender:</label>
+    <select name="gender">
+      <option value="">Select Gender</option>
+      <option>Male</option>
+      <option>Female</option>
+      <option>Other</option>
+    </select>
+    <span class="error" id="genderError"></span>
+
+    <label>Address:</label>
+    <textarea name="address" rows="3"></textarea>
+    <span class="error" id="addressError"></span>
+
+    <label>Qualification:</label>
+    <input type="text" name="qualification">
+    <span class="error" id="qualificationError"></span>
+
+    <label>Education Details:</label>
+    <textarea name="education" rows="3"></textarea>
+    <span class="error" id="educationError"></span>
+
+    <label>Upload Photo:</label>
+    <input type="file" name="photo" accept="image/*">
+    <span class="error" id="photoError"></span>
+
+    <label>Upload Signature:</label>
+    <input type="file" name="signature" accept="image/*">
+    <span class="error" id="signatureError"></span>
+
+    <label>Email ID:</label>
+    <input type="email" name="email">
+    <span class="error" id="emailError"></span>
+
+    <label>Phone Number:</label>
+    <input type="tel" name="phone" pattern="[0-9]{10}">
+    <span class="error" id="phoneError"></span>
+
+    <div class="btn-group">
+      <button type="submit" class="submit-btn">Submit</button>
+      <button type="reset" class="reset-btn">Reset</button>
+    </div>
+  </form>
+
+  <div id="result"></div>
+
+  <script>
+    function validateForm() {
+      const form = document.getElementById('registrationForm');
+      let valid = true;
+
+      // Clear previous errors
+      document.querySelectorAll(".error").forEach(e => e.textContent = "");
+
+      const fields = [
+        "firstName", "lastName", "fatherName", "motherName",
+        "dob", "gender", "address", "qualification",
+        "education", "photo", "signature", "email", "phone"
+      ];
+
+      fields.forEach(field => {
+        const value = form[field].value.trim();
+        if (value === "") {
+          document.getElementById(field + "Error").textContent = "This field is required.";
+          valid = false;
+        }
+      });
+
+      // Email validation
+      const email = form.email.value.trim();
+      const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+      if (email && !emailPattern.test(email)) {
+        document.getElementById("emailError").textContent = "Invalid email format.";
+        valid = false;
+      }
+
+      // Phone validation
+      const phone = form.phone.value.trim();
+      if (phone && (phone.length !== 10 || isNaN(phone))) {
+        document.getElementById("phoneError").textContent = "Phone must be 10 digits.";
+        valid = false;
+      }
+
+      if (!valid) return false;
+
+      // Show submitted details
+      let resultHTML = "<h3>Submitted Details:</h3><ul>";
+      fields.forEach(field => {
+        if (field !== "photo" && field !== "signature") {
+          resultHTML += `<li><strong>${field}:</strong> ${form[field].value}</li>`;
+        }
+      });
+      resultHTML += "</ul>";
+      document.getElementById("result").innerHTML = resultHTML;
+
+      return false; // prevent actual form submission
+    }
+  </script>
+</body>
+</html>
