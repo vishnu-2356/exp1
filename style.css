@@ -29,6 +29,11 @@ input, textarea, select {
   box-sizing: border-box;
 }
 
+.error {
+  color: red;
+  font-size: 14px;
+}
+
 button {
   margin-top: 15px;
   padding: 10px;
@@ -51,4 +56,15 @@ button {
 .btn-group {
   display: flex;
   justify-content: space-between;
+}
+
+#result {
+  margin-top: 20px;
+  background: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
